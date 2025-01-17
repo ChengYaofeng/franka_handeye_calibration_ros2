@@ -62,7 +62,7 @@ class HandeyePublisher(Node):
 
         # ID of the aruco marker mounted on the robot
         self.marker_id = self.declare_parameter(
-            "marker_id", 1).get_parameter_value().integer_value
+            "marker_id", 250).get_parameter_value().integer_value
 
         if parameters.calibration_type == 'eye_in_hand':
             orig = parameters.robot_effector_frame
