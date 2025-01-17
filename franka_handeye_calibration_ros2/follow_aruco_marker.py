@@ -23,14 +23,14 @@ class ArucoMarkerFollower(Node):
         self.logger = self.get_logger()
 
         self.arm_joint_names = [
-            "joint_1", "joint_2", "joint_3", "joint_4", "joint_5", "joint_6"
+            "fr3_joint1", "fr3_joint2", "fr3_joint3", "fr3_joint4", "fr3_joint5", "fr3_joint6", "fr3_joint7"
         ]
         self.moveit2 = MoveIt2(
             node=self,
             joint_names=self.arm_joint_names,
             base_link_name="fr3_link0",
             end_effector_name="fr3_hand",
-            group_name="ar_manipulator",
+            group_name="fr3_arm",
             callback_group=ReentrantCallbackGroup(),
         )
         self.moveit2.planner_id = "RRTConnectkConfigDefault"
@@ -39,17 +39,17 @@ class ArucoMarkerFollower(Node):
 
         # ID of the aruco marker mounted on the robot
         self.marker_id = self.declare_parameter(
-            "marker_id", 1).get_parameter_value().integer_value
+            "marker_id", 250).get_parameter_value().integer_value
 
         self.subscription = self.create_subscription(ArucoMarkers,
                                                      "/aruco_markers",
                                                      self.handle_aruco_markers,
-                                                     1)
+                                                     250)
         self.pose_pub = self.create_publisher(PoseStamped, "/cal_marker_pose",
-                                              1)
+                                              250)
 
         self.target_pose_pub = self.create_publisher(
-            PoseStamped, "/follow_aruco_target_pose", 1)
+            PoseStamped, "/follow_aruco_target_pose", 250)
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
         self._prev_marker_pose = None
@@ -83,7 +83,7 @@ class ArucoMarkerFollower(Node):
         try:
             transformed_pose = self._transform_pose(cal_marker_pose,
                                                     "camera_color_optical_frame",
-                                                    "base_link")
+                                                    "fr3_link0")
         except tf2_ros.LookupException as e:
             self.logger.error(f"Error transforming pose: {e}")
             return
@@ -115,7 +115,7 @@ class ArucoMarkerFollower(Node):
 
     def move_to(self, msg: Pose):
         pose_goal = PoseStamped()
-        pose_goal.header.frame_id = "base_link"
+        pose_goal.header.frame_id = "fr3_link0"
         pose_goal.pose = msg
 
         self.moveit2.move_to_pose(pose=pose_goal)
