@@ -37,6 +37,8 @@ git clone https://github.com/JMU-ROBOTICS-VIVA/ros2_aruco.git
 
 git clone https://github.com/marcoesposito1988/easy_handeye2
 
+git clone https://github.com/AndrejOrsula/pymoveit2.git
+
 rosdep install -iyr --from-paths src
 
 colcon build
