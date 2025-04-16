@@ -64,4 +64,6 @@ ros2 launch franka_handeye_calib calibrate.launch.py
 ```
 Then use the rviz to move the robot 6 or more times to acquire relatively precise transpose result. About ~1.5cm deviation, which can be manually correct during using.
 
+To visualize the camera in case the aruco code out of the image, you can use `rqt` and visualize the `/camera/color/image_raw` topic
+
 The final results will saved in ~/.ros2/easy_handeye/calibrations/fr3_calibration.calib
