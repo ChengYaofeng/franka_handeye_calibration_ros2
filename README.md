@@ -39,6 +39,7 @@ git clone https://github.com/marcoesposito1988/easy_handeye2
 
 git clone https://github.com/AndrejOrsula/pymoveit2.git
 
+cd ..
 rosdep install -iyr --from-paths src
 
 colcon build
@@ -60,7 +61,7 @@ ros2 launch franka_fr3_moveit_config moveit.launch.py robot_ip:='172.16.0.2'
 ```
 In a new terminal, launch the calibration file. You need to put the camera to capture the aruco marker on the robot before running the following command. Otherwise you'll meet the error.
 ```
-ros2 launch franka_handeye_calib calibrate.launch.py 
+ros2 launch franka_handeye_calibration_ros2 calibrate.launch.py 
 ```
 Then use the rviz to move the robot 6 or more times to acquire relatively precise transpose result. About ~1.5cm deviation, which can be manually correct during using.
 
