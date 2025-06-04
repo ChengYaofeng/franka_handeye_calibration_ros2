@@ -67,4 +67,27 @@ Then use the rviz to move the robot 6 or more times to acquire relatively precis
 
 To visualize the camera in case the aruco code out of the image, you can use `rqt` and visualize the `/camera/color/image_raw` topic
 
-The final results will saved in ~/.ros2/easy_handeye/calibrations/fr3_calibration.calib
+The final results will saved in `~/.ros2/easy_handeye/calibrations/fr3_calibration.calib` as follows.
+```
+parameters:
+  name: fr3_calibration
+  calibration_type: eye_on_base
+  robot_base_frame: fr3_link0
+  robot_effector_frame: fr3_hand
+  tracking_base_frame: camera_color_frame
+  tracking_marker_frame: calibration_aruco
+  freehand_robot_movement: true
+  move_group_namespace: /
+  move_group: manipulator
+transform:
+  translation:
+    x: 0.7427870266487906
+    y: -0.023193432826723256
+    z: 0.5621232358763679
+  rotation:
+    x: -0.6411793106728074
+    y: -0.6636373375658318
+    z: 0.28132888999516564
+    w: 0.26330330686826875
+```
+
